@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang Visa - Tư Vấn Visa Trung Quốc Uy Tín</title>
+<style>
+  :root {
+    --red: #c0392b;
+    --red-dark: #922b21;
+    --gold: #d4af37;
+    --dark: #1a1a1a;
+    --gray: #6b6b6b;
+    --bg-light: #faf8f5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--dark); line-height: 1.6; background: #fff; }
+  a { text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* Sticky contact bar */
+  .contact-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--red); color: #fff; padding: 14px 20px;
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    box-shadow: 0 -2px 10px rgba(0,0,0,.15);
+  }
+  .contact-bar a {
+    color: #fff; font-weight: 600; padding: 8px 20px; border-radius: 30px;
+    border: 2px solid #fff; font-size: 14px; transition: .2s;
+  }
+  .contact-bar a:hover { background: #fff; color: var(--red); }
+
+  /* Header */
+  header {
+    background: var(--dark); color: #fff; padding: 16px 0;
+  }
+  header .container { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 22px; font-weight: 700; color: var(--gold); }
+  .logo span { color: #fff; }
+  nav a { color: #fff; margin-left: 24px; font-size: 15px; }
+  nav a:hover { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+    color: #fff; padding: 70px 0 90px; text-align: center;
+  }
+  .hero h1 { font-size: 38px; margin-bottom: 16px; }
+  .hero p { font-size: 18px; opacity: .95; max-width: 640px; margin: 0 auto 30px; }
+  .btn-cta {
+    display: inline-block; background: var(--gold); color: var(--dark);
+    font-weight: 700; padding: 14px 36px; border-radius: 30px; font-size: 16px;
+  }
+  .btn-cta:hover { background: #e8c85c; }
+
+  /* Section titles */
+  .section { padding: 60px 0; }
+  .section-title { text-align: center; margin-bottom: 40px; }
+  .section-title h2 { font-size: 30px; color: var(--dark); }
+  .section-title p { color: var(--gray); margin-top: 8px; }
+  .bg-light { background: var(--bg-light); }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; }
+  .service-card {
+    background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 28px;
+    text-align: center; transition: .2s; box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+  .service-card .icon { font-size: 36px; margin-bottom: 14px; }
+  .service-card h3 { font-size: 18px; margin-bottom: 10px; color: var(--red); }
+  .service-card p { color: var(--gray); font-size: 14px; }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; }
+  .price-card {
+    background: #fff; border-radius: 12px; padding: 32px 24px; text-align: center;
+    border: 2px solid #eee; position: relative;
+  }
+  .price-card.featured { border-color: var(--gold); transform: scale(1.03); }
+  .price-card.featured::before {
+    content: "PHỔ BIẾN NHẤT"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--dark); font-size: 11px; font-weight: 700;
+    padding: 4px 14px; border-radius: 20px;
+  }
+  .price-card h3 { font-size: 20px; margin-bottom: 6px; }
+  .price-card .price { font-size: 32px; color: var(--red); font-weight: 700; margin: 16px 0; }
+  .price-card .price span { font-size: 14px; color: var(--gray); font-weight: 400; }
+  .price-card ul { list-style: none; text-align: left; margin: 20px 0; }
+  .price-card ul li { padding: 6px 0; font-size: 14px; color: var(--gray); }
+  .price-card ul li::before { content: "✓ "; color: var(--red); font-weight: 700; }
+  .price-card .btn-outline {
+    display: block; border: 2px solid var(--red); color: var(--red); font-weight: 700;
+    padding: 10px; border-radius: 30px; margin-top: 10px;
+  }
+  .price-card .btn-outline:hover { background: var(--red); color: #fff; }
+
+  /* Process */
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 24px; text-align: center; }
+  .process-step .num {
+    width: 50px; height: 50px; border-radius: 50%; background: var(--red); color: #fff;
+    font-weight: 700; font-size: 20px; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .process-step h4 { margin-bottom: 8px; font-size: 16px; }
+  .process-step p { color: var(--gray); font-size: 14px; }
+
+  /* Testimonials */
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
+  .testi-card {
+    background: #fff; border-radius: 10px; padding: 26px; border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  }
+  .testi-card .stars { color: var(--gold); margin-bottom: 10px; }
+  .testi-card p { font-style: italic; color: var(--dark); margin-bottom: 14px; font-size: 14px; }
+  .testi-card .name { font-weight: 700; font-size: 14px; }
+  .testi-card .role { color: var(--gray); font-size: 12px; }
+
+  /* Contact form */
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+  .contact-info h2 { font-size: 26px; margin-bottom: 16px; color: var(--dark); }
+  .contact-info p { color: var(--gray); margin-bottom: 20px; }
+  .contact-info .item { margin-bottom: 14px; font-size: 15px; }
+  .contact-info .item b { color: var(--red); }
+  form.consult { background: #fff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+  form.consult input, form.consult select, form.consult textarea {
+    width: 100%; padding: 12px 14px; margin-bottom: 14px; border: 1px solid #ddd;
+    border-radius: 8px; font-size: 14px; font-family: inherit;
+  }
+  form.consult button {
+    width: 100%; background: var(--red); color: #fff; border: none; padding: 14px;
+    border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  }
+  form.consult button:hover { background: var(--red-dark); }
+
+  footer {
+    background: var(--dark); color: #ccc; padding: 40px 0 90px; text-align: center; font-size: 13px;
+  }
+  footer .logo { justify-content: center; margin-bottom: 10px; }
+
+  @media (max-width: 768px) {
+    .contact-wrap { grid-template-columns: 1fr; }
+    nav { display: none; }
+    .hero h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">Trang<span>Visa</span></div>
+    <nav>
+      <a href="#dichvu">Dịch vụ</a>
+      <a href="#bangia">Bảng giá</a>
+      <a href="#quytrinh">Quy trình</a>
+      <a href="#danhgia">Đánh giá</a>
+      <a href="#lienhe">Liên hệ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Tư Vấn & Làm Visa Trung Quốc Uy Tín – Nhanh Chóng</h1>
+    <p>Hỗ trợ trọn gói visa du lịch, công tác, thăm thân đi Trung Quốc. Tỷ lệ đậu cao, xử lý nhanh, hoàn tiền nếu không đạt.</p>
+    <a href="#lienhe" class="btn-cta">Nhận Tư Vấn Miễn Phí</a>
+  </div>
+</section>
+
+<section class="section" id="dichvu">
+  <div class="container">
+    <div class="section-title">
+      <h2>Dịch Vụ Visa Trung Quốc</h2>
+      <p>Đa dạng loại visa, phù hợp mọi nhu cầu di chuyển của bạn</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🧳</div>
+        <h3>Visa Du Lịch</h3>
+        <p>Visa L dành cho khách đi du lịch, tham quan, thời hạn linh hoạt 1-6 tháng.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">💼</div>
+        <h3>Visa Công Tác</h3>
+        <p>Visa M dành cho mục đích thương mại, ký kết hợp đồng, khảo sát thị trường.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">👨‍👩‍👧</div>
+        <h3>Visa Thăm Thân</h3>
+        <p>Visa Q dành cho khách thăm người thân, gia đình đang sinh sống tại Trung Quốc.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎓</div>
+        <h3>Visa Du Học</h3>
+        <p>Visa X hỗ trợ hồ sơ du học sinh, thực tập sinh tại các trường Trung Quốc.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">✈️</div>
+        <h3>Visa Quá Cảnh</h3>
+        <p>Visa G dành cho khách quá cảnh qua Trung Quốc để đến điểm đến khác.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">⚡</div>
+        <h3>Dịch Vụ Khẩn</h3>
+        <p>Xử lý nhanh trong 3-5 ngày làm việc cho khách cần visa gấp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="bangia">
+  <div class="container">
+    <div class="section-title">
+      <h2>Bảng Giá Dịch Vụ</h2>
+      <p>Giá minh bạch, không phát sinh chi phí ẩn</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Gói Tiêu Chuẩn</h3>
+        <div class="price">1.200.000đ<span> /hồ sơ</span></div>
+        <ul>
+          <li>Thời gian xử lý 7-10 ngày</li>
+          <li>Hỗ trợ chuẩn bị hồ sơ</li>
+          <li>Tư vấn miễn phí</li>
+          <li>Visa du lịch/thăm thân</li>
+        </ul>
+        <a href="#lienhe" class="btn-outline">Đăng Ký</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Gói Nhanh</h3>
+        <div class="price">2.000.000đ<span> /hồ sơ</span></div>
+        <ul>
+          <li>Thời gian xử lý 3-5 ngày</li>
+          <li>Ưu tiên xử lý hồ sơ</li>
+          <li>Hỗ trợ 24/7</li>
+          <li>Áp dụng mọi loại visa</li>
+        </ul>
+        <a href="#lienhe" class="btn-outline">Đăng Ký</a>
+      </div>
+      <div class="price-card">
+        <h3>Gói Doanh Nghiệp</h3>
+        <div class="price">Liên hệ<span></span></div>
+        <ul>
+          <li>Áp dụng số lượng lớn</li>
+          <li>Visa công tác/thương mại</li>
+          <li>Nhân viên hỗ trợ riêng</li>
+          <li>Ưu đãi theo hợp đồng</li>
+        </ul>
+        <a href="#lienhe" class="btn-outline">Liên Hệ Báo Giá</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quytrinh">
+  <div class="container">
+    <div class="section-title">
+      <h2>Quy Trình Làm Visa</h2>
+      <p>Đơn giản 4 bước, tiết kiệm thời gian cho bạn</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="num">1</div>
+        <h4>Để lại thông tin</h4>
+        <p>Gửi số điện thoại hoặc nhắn Zalo để được tư vấn</p>
+      </div>
+      <div class="process-step">
+        <div class="num">2</div>
+        <h4>Chuẩn bị hồ sơ</h4>
+        <p>Nhân viên hướng dẫn giấy tờ cần thiết</p>
+      </div>
+      <div class="process-step">
+        <div class="num">3</div>
+        <h4>Nộp & xử lý</h4>
+        <p>Chúng tôi nộp hồ sơ và theo dõi tiến độ</p>
+      </div>
+      <div class="process-step">
+        <div class="num">4</div>
+        <h4>Nhận visa</h4>
+        <p>Giao visa tận nơi, hỗ trợ sau khi nhận</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="danhgia">
+  <div class="container">
+    <div class="section-title">
+      <h2>Khách Hàng Nói Gì</h2>
+      <p>Hàng ngàn khách hàng đã tin tưởng sử dụng dịch vụ</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Làm visa du lịch Trung Quốc chỉ trong 4 ngày, tư vấn nhiệt tình, giá cả hợp lý. Rất hài lòng!"</p>
+        <div class="name">Nguyễn Thị Lan</div>
+        <div class="role">Khách hàng visa du lịch</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Công ty mình dùng dịch vụ làm visa công tác cho cả đoàn, xử lý nhanh và chuyên nghiệp."</p>
+        <div class="name">Trần Văn Minh</div>
+        <div class="role">Đại diện doanh nghiệp</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Được hỗ trợ chuẩn bị hồ sơ chi tiết, không phải đi lại nhiều lần. Rất đáng tin cậy."</p>
+        <div class="name">Phạm Thu Hà</div>
+        <div class="role">Khách hàng thăm thân</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lienhe">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h2>Liên Hệ Tư Vấn Ngay</h2>
+        <p>Để lại thông tin, chúng tôi sẽ gọi lại tư vấn miễn phí trong vòng 15 phút.</p>
+        <div class="item">📞 Hotline: <b>0900 000 000</b></div>
+        <div class="item">💬 Zalo: <b>0900 000 000</b></div>
+        <div class="item">📍 Địa chỉ: Đang cập nhật</div>
+        <div class="item">🕒 Làm việc: 8:00 - 21:00 (Tất cả các ngày)</div>
+      </div>
+      <form class="consult" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="ten" placeholder="Họ và tên" required>
+        <input type="tel" name="sdt" placeholder="Số điện thoại" required>
+        <select name="loai_visa">
+          <option value="">Chọn loại visa cần tư vấn</option>
+          <option value="du-lich">Visa du lịch</option>
+          <option value="cong-tac">Visa công tác</option>
+          <option value="tham-than">Visa thăm thân</option>
+          <option value="du-hoc">Visa du học</option>
+          <option value="khac">Khác</option>
+        </select>
+        <textarea name="ghichu" rows="3" placeholder="Ghi chú thêm (nếu có)"></textarea>
+        <button type="submit">Gửi Yêu Cầu Tư Vấn</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="logo">Trang<span>Visa</span></div>
+    <p>© 2026 Trang Visa. Dịch vụ tư vấn visa Trung Quốc uy tín - nhanh chóng.</p>
+  </div>
+</footer>
+
+<div class="contact-bar">
+  <a href="tel:0900000000">📞 Gọi Ngay: 0900 000 000</a>
+  <a href="https://zalo.me/0900000000" target="_blank">💬 Chat Zalo</a>
+</div>
+
+</body>
+</html>
