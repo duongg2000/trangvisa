@@ -142,6 +142,75 @@
   }
   footer .logo { justify-content: center; margin-bottom: 10px; }
 
+  /* Gallery */
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; }
+  .gallery-item {
+    border-radius: 10px; overflow: hidden; position: relative; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08); background: #eee; aspect-ratio: 4/3;
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: .3s; }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item .caption {
+    position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,.6); color: #fff;
+    padding: 10px 14px; font-size: 13px;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 2000;
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 8px; }
+  .lightbox .close-btn {
+    position: absolute; top: 24px; right: 30px; color: #fff; font-size: 32px; cursor: pointer;
+  }
+
+  /* Accordion */
+  .accordion { max-width: 800px; margin: 0 auto; }
+  .acc-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .acc-tab-btn {
+    padding: 10px 22px; border-radius: 30px; border: 2px solid var(--red); background: #fff;
+    color: var(--red); font-weight: 600; cursor: pointer; font-size: 14px;
+  }
+  .acc-tab-btn.active { background: var(--red); color: #fff; }
+  .acc-panel { display: none; }
+  .acc-panel.active { display: block; }
+  .acc-item { border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+  .acc-header {
+    padding: 16px 20px; background: #fff; cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; font-weight: 600; font-size: 15px;
+  }
+  .acc-header:hover { background: var(--bg-light); }
+  .acc-header .arrow { transition: .2s; color: var(--red); }
+  .acc-item.open .arrow { transform: rotate(180deg); }
+  .acc-body { max-height: 0; overflow: hidden; transition: .25s; background: var(--bg-light); }
+  .acc-item.open .acc-body { max-height: 300px; }
+  .acc-body-inner { padding: 4px 20px 18px; color: var(--gray); font-size: 14px; }
+  .acc-body-inner ul { padding-left: 18px; }
+
+  /* Success modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 3000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: #fff; border-radius: 14px; padding: 40px; text-align: center; max-width: 380px;
+    animation: pop .25s ease;
+  }
+  @keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-box .check {
+    width: 64px; height: 64px; border-radius: 50%; background: #2ecc71; color: #fff; font-size: 32px;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+  }
+  .modal-box h3 { margin-bottom: 10px; }
+  .modal-box p { color: var(--gray); font-size: 14px; margin-bottom: 20px; }
+  .modal-box button {
+    background: var(--red); color: #fff; border: none; padding: 12px 30px; border-radius: 30px;
+    font-weight: 700; cursor: pointer;
+  }
+
   @media (max-width: 768px) {
     .contact-wrap { grid-template-columns: 1fr; }
     nav { display: none; }
@@ -213,12 +282,104 @@
   </div>
 </section>
 
+<section class="section" id="ketqua">
+  <div class="container">
+    <div class="section-title">
+      <h2>Kết Quả Visa Đã Thực Hiện</h2>
+      <p>Một số hồ sơ tiêu biểu đã được cấp visa thành công (bấm vào ảnh để xem lớn hơn)</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox('images/ketqua1.jpg')">
+        <img src="images/ketqua1.jpg" alt="Visa Trung Quốc đã cấp 1" onerror="this.src='https://placehold.co/400x300/eee/999?text=Anh+visa+1'">
+        <div class="caption">Visa du lịch - Hà Nội</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/ketqua2.jpg')">
+        <img src="images/ketqua2.jpg" alt="Visa Trung Quốc đã cấp 2" onerror="this.src='https://placehold.co/400x300/eee/999?text=Anh+visa+2'">
+        <div class="caption">Visa công tác - TP.HCM</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/ketqua3.jpg')">
+        <img src="images/ketqua3.jpg" alt="Visa Trung Quốc đã cấp 3" onerror="this.src='https://placehold.co/400x300/eee/999?text=Anh+visa+3'">
+        <div class="caption">Visa thăm thân - Đà Nẵng</div>
+      </div>
+    </div>
+    <p style="text-align:center; color:var(--gray); font-size:13px; margin-top:16px;">
+      * Đây là ảnh mẫu tạm thời. Gửi ảnh visa thật của bạn để tôi thay vào đúng vị trí (lưu vào thư mục <code>images/</code>).
+    </p>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="close-btn">&times;</span>
+  <img id="lightbox-img" src="">
+</div>
+
 <section class="section bg-light" id="bangia">
   <div class="container">
     <div class="section-title">
-      <h2>Bảng Giá Dịch Vụ</h2>
-      <p>Giá minh bạch, không phát sinh chi phí ẩn</p>
+      <h2>Hồ Sơ & Bảng Giá</h2>
+      <p>Xem giấy tờ cần chuẩn bị và chi phí theo từng loại visa</p>
     </div>
+
+    <div class="accordion">
+      <div class="acc-tabs">
+        <button class="acc-tab-btn active" onclick="switchTab('dulich')">Du lịch</button>
+        <button class="acc-tab-btn" onclick="switchTab('congtac')">Công tác</button>
+        <button class="acc-tab-btn" onclick="switchTab('thamthan')">Thăm thân</button>
+      </div>
+
+      <div class="acc-panel active" id="panel-dulich">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">📄 Giấy tờ cá nhân <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Hộ chiếu còn hạn trên 6 tháng</li><li>2 ảnh 4x6 nền trắng</li><li>CCCD/CMND photo công chứng</li></ul>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">✈️ Giấy tờ chuyến đi <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Vé máy bay khứ hồi (dự kiến)</li><li>Đặt phòng khách sạn</li><li>Lịch trình du lịch chi tiết</li></ul>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">💰 Giấy tờ tài chính <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Sao kê tài khoản 3 tháng gần nhất</li><li>Xác nhận số dư (khuyến khích)</li></ul>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="acc-panel" id="panel-congtac">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">📄 Giấy tờ cá nhân <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Hộ chiếu còn hạn trên 6 tháng</li><li>2 ảnh 4x6 nền trắng</li><li>Hợp đồng lao động</li></ul>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">🏢 Giấy tờ công ty <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Giấy mời công tác từ đối tác Trung Quốc</li><li>Giấy phép kinh doanh (bản sao)</li><li>Quyết định cử đi công tác</li></ul>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="acc-panel" id="panel-thamthan">
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">📄 Giấy tờ cá nhân <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Hộ chiếu còn hạn trên 6 tháng</li><li>2 ảnh 4x6 nền trắng</li></ul>
+          </div></div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">👨‍👩‍👧 Giấy tờ thân nhân <span class="arrow">▼</span></div>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul><li>Giấy mời của người thân tại Trung Quốc</li><li>Giấy tờ chứng minh quan hệ (khai sinh, kết hôn...)</li></ul>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:40px"></div>
     <div class="pricing-grid">
       <div class="price-card">
         <h3>Gói Tiêu Chuẩn</h3>
@@ -328,7 +489,7 @@
         <div class="item">📍 Địa chỉ: Đang cập nhật</div>
         <div class="item">🕒 Làm việc: 8:00 - 21:00 (Tất cả các ngày)</div>
       </div>
-      <form class="consult" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="consult" id="consultForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <input type="text" name="ten" placeholder="Họ và tên" required>
         <input type="tel" name="sdt" placeholder="Số điện thoại" required>
         <select name="loai_visa">
@@ -357,6 +518,59 @@
   <a href="tel:0900000000">📞 Gọi Ngay: 0900 000 000</a>
   <a href="https://zalo.me/0900000000" target="_blank">💬 Chat Zalo</a>
 </div>
+
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <div class="check">✓</div>
+    <h3>Gửi yêu cầu thành công!</h3>
+    <p>Cảm ơn bạn đã liên hệ. Nhân viên tư vấn sẽ gọi lại cho bạn trong vòng 15 phút.</p>
+    <button onclick="closeModal()">Đóng</button>
+  </div>
+</div>
+
+<script>
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  // Accordion tabs
+  function switchTab(name) {
+    document.querySelectorAll('.acc-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+  function toggleAcc(header) {
+    const item = header.parentElement;
+    const wasOpen = item.classList.contains('open');
+    item.parentElement.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Success modal
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('active');
+  }
+  document.getElementById('consultForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+      .then(() => {
+        document.getElementById('successModal').classList.add('active');
+        form.reset();
+      })
+      .catch(() => {
+        document.getElementById('successModal').classList.add('active');
+        form.reset();
+      });
+  });
+</script>
 
 </body>
 </html>
